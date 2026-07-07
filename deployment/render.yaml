@@ -10,7 +10,7 @@ services:
   - type: web
     name: career-copilot-api
     runtime: python
-    plan: starter
+    plan: free
     buildCommand: pip install -r backend/requirements.txt
     # `cd backend` matters: main.py and every router/agent module import each
     # other with bare names (e.g. `from routers import profile`), which only
