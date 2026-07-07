@@ -10,9 +10,9 @@ Uploads your resume, reads your GitHub (deep: pinned repos, README, contribution
 
 Built for the **AI Agents Intensive — Vibe Coding Capstone Project**.
 
-- 🎥 **Demo video:** _add your YouTube link here_
+- 🎥 **Demo video:** https://www.youtube.com/watch?v=ZRK2SVwSP8Y
 - ✍️ **Kaggle writeup:** kaggle.com/competitions/vibecoding-agents-capstone-project/writeups/new-writeup-1783344655560
-- 🌐 **Live demo:** _add your deployed Cloud Run / Render URL here_
+- 🌐 **Live demo:** https://career-copilot-ui.onrender.com
 - 💻 **Source:** https://github.com/ajaykesarwani/ai-career-copilot
 
 ---
