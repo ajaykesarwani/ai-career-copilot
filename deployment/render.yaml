@@ -1,0 +1,56 @@
+# render.yaml — Deploy to Render.com
+# Connect your GitHub repo in the Render dashboard — this file auto-configures
+# both services. IMPORTANT: render.yaml must live at the repository root for
+# Render's Blueprint auto-detection to find it.
+# After the Blueprint is created, set the "sync: false" secrets below in
+# Render → each service → Environment.
+
+services:
+  # ── Backend API ──────────────────────────────────────────────────────────────
+  - type: web
+    name: career-copilot-api
+    runtime: python
+    region: frankfurt
+    plan: starter
+    buildCommand: pip install -r backend/requirements.txt
+    # `cd backend` matters: main.py and every router/agent module import each
+    # other with bare names (e.g. `from routers import profile`), which only
+    # resolve correctly when the process is launched with backend/ as the
+    # working directory — the same way it runs locally and in Docker.
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash   # check https://ai.google.dev/gemini-api/docs/deprecations periodically
+      - key: GROQ_API_KEY
+        sync: false          # optional — enables automatic fallback on Gemini 429s
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: GITHUB_TOKEN
+        sync: false          # optional — raises GitHub enrichment rate limit from 60/hr
+      - key: ADZUNA_APP_ID
+        sync: false          # optional — enables live job search instead of AI-estimated jobs
+      - key: ADZUNA_APP_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://career-copilot-ui.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # ── Frontend (static site) ───────────────────────────────────────────────────
+  - type: web
+    name: career-copilot-ui
+    runtime: static
+    region: frankfurt
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://career-copilot-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

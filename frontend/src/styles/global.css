@@ -1,0 +1,80 @@
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brand: #6C5CE7;
+  --brand-light: #a29bfe;
+  --brand-dark: #4834d4;
+  --brand-alpha: rgba(108, 92, 231, 0.12);
+
+  --surface: #ffffff;
+  --surface-1: #f8f7ff;
+  --surface-2: #f0eefe;
+  --surface-3: #e8e4fd;
+
+  --text: #1a1a2e;
+  --text-2: #4a4a6a;
+  --text-3: #8888aa;
+
+  --border: #e4e1f7;
+  --border-2: #ccc9f0;
+
+  --success: #00b894;
+  --success-bg: #e8faf5;
+  --success-border: #b2eedd;
+
+  --warning: #fdcb6e;
+  --warning-bg: #fff8e1;
+
+  --danger: #e17055;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+
+  --shadow: 0 2px 12px rgba(108, 92, 231, 0.10);
+  --shadow-lg: 0 8px 32px rgba(108, 92, 231, 0.18);
+  --shadow-focus: 0 0 0 3px rgba(108, 92, 231, 0.20);
+
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+
+  --transition: 150ms ease;
+}
+
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--surface-1);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 10px; }
+
+/* ── Typography utilities ─────────────────────────────────────────────────── */
+.text-muted { color: var(--text-3); }
+.text-2 { color: var(--text-2); }
+.text-brand { color: var(--brand); }
+.font-mono { font-family: var(--font-mono); }
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes spin   { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%,80%,100% { transform: scale(1); } 40% { transform: scale(1.4); } }
+@keyframes pulse  { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.animate-fade-in { animation: fadeIn 0.25s ease both; }
+.animate-spin     { animation: spin 1s linear infinite; }

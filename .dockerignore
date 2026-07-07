@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+
+# Python
+**/__pycache__
+**/*.py[cod]
+**/*.egg-info
+**/venv
+**/.venv
+**/env
+
+# Node — reinstalled fresh inside the frontend-build stage
+**/node_modules
+frontend/dist
+frontend/.vite
+
+# Env / secrets — never send these to a build context or bake into an image
+.env
+.env.*
+!.env.example
+
+# Not needed inside the image
+deployment
+*.md
+.DS_Store
+Thumbs.db
